@@ -79,11 +79,11 @@ public class CoinService implements CoinImpl {
             coin.setTotalVolume(marketData.get("total_volume").get("usd").asLong());
             coin.setHigh24h(marketData.get("high_24h").get("usd").asLong());
             coin.setLow24h(marketData.get("low_24h").get("usd").asLong());
-            coin.setPriceChange24h(marketData.get("price_change_24h").get("usd").asLong());
-            coin.setPriceChangePercentage24h(marketData.get("price_change_percentage_24h").get("usd").asLong());
-            coin.setMarketCapChange24h(marketData.get("market_cap_change_24h").get("usd").asLong());
-            coin.setMarketCapChangePercentage24h(marketData.get("market_cap_change_percentage_24h").get("usd").asLong());
-            coin.setTotalSupply(marketData.get("total_supply").get("usd").asLong());
+            coin.setPriceChange24h(marketData.get("price_change_24h").asLong());
+            coin.setPriceChangePercentage24h(marketData.get("price_change_percentage_24h").asLong());
+            coin.setMarketCapChange24h(marketData.get("market_cap_change_24h").asLong());
+            coin.setMarketCapChangePercentage24h(marketData.get("market_cap_change_percentage_24h").asLong());
+            coin.setTotalSupply(marketData.get("total_supply").asLong());
             coinRepository.save(coin);
 
             return response.getBody();
