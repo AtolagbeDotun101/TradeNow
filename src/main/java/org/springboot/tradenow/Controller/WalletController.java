@@ -1,9 +1,11 @@
 package org.springboot.tradenow.Controller;
 
+import org.springboot.tradenow.Entity.Order;
 import org.springboot.tradenow.Entity.User;
 import org.springboot.tradenow.Entity.Wallet;
 import org.springboot.tradenow.Entity.WalletTransaction;
 import org.springboot.tradenow.Repository.Implementation.UserImpl;
+import org.springboot.tradenow.Service.OrderService;
 import org.springboot.tradenow.Service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ public class WalletController {
     private WalletService walletService;
     @Autowired
     private UserImpl userServiceRepository;
+    @Autowired
+    private OrderService orderService;
 
 
     @GetMapping
@@ -36,11 +40,13 @@ public class WalletController {
     }
 
     @PutMapping("/{orderId}/pay")
-    public ResponseEntity<Wallet> walletToWalletTransfer(@RequestHeader("Authorization")String jwt, @PathVariable Long orderId) throws Exception {
-        User sender = userServiceRepository.findUserProfileByJwt(jwt);
+    public ResponseEntity<Wallet> payOrderPayment(@RequestHeader("Authorization")String jwt, @PathVariable Long orderId) throws Exception {
+        User user = userServiceRepository.findUserProfileByJwt(jwt);
+        Order order = orderService.getOrderById(orderId);
 
+        Wallet wallet = walletService.payOrderPayment(order, user);
 
-        return ResponseEntity.status(HttpStatus.OK).body();
+        return ResponseEntity.status(HttpStatus.OK).body(wallet);
     }
 }
 
