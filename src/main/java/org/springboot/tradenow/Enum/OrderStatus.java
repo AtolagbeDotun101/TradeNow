@@ -6,5 +6,6 @@ public enum OrderStatus {
     ERROR,
     FILED,
     PARTIALLY_FILLED,
-    SUCCESS
+    SUCCESS,
+    FAILED
 }

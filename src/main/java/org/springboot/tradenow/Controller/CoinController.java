@@ -33,7 +33,7 @@ public class CoinController {
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 
-    @GetMapping("/{coinId}/chart")
+    @GetMapping("/{coinId}/search")
     public ResponseEntity<JsonNode> searchCoin(@RequestParam("query")String keyword) throws Exception {
         String searchCoin = coinService.searchCoin(keyword);
         JsonNode res = objectMapper.readTree(searchCoin);

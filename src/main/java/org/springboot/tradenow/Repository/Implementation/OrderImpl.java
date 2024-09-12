@@ -14,5 +14,5 @@ public interface OrderImpl {
     Order createOrder(User user, OrderItem orderItem, OrderType orderType);
     Order getOrderById(Long id) throws Exception;
     List<Order> getAllOrders(Long userId, OrderType orderType, String assetSymbol);
-    Order processOrder(Coin coin, OrderType orderType, double quantity, User user);
+    Order processOrder(Coin coin, OrderType orderType, double quantity, User user) throws Exception;
 }
